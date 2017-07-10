@@ -6,7 +6,7 @@ $(function(){
             // Your options
             openClass : 'in',
             closeClass : 'hide',
-            closeBtn : $('.close', $elem)
+            closeBtn : $('#cookie-headband-close', $elem)
         });
     });
 });

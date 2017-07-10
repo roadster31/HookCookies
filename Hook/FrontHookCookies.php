@@ -24,20 +24,17 @@ class FrontHookCookies extends BaseHook {
 
     public function addCookiesCSS(HookRenderEvent $event)
     {
-        $content = $this->addCSS('assets/css/cookie-headband.css');
-        $event->add($content);
+        $event->add($this->addCSS('assets/css/cookie-headband.css'));
     }
 
     public function addCookies(HookRenderEvent $event)
     {
-        $content = $this->addJS('assets/js/cookie-headband.min.js');
-        $event->add($content);
-
-        $content = $this->render("cookie-headband.html");
-        $event->add($content);
-
-        $content = $this->addJS('assets/js/init-cookie-headband.js');
-        $event->add($content);
+        $event
+            ->add($this->addJS('assets/js/jquery.cookie.js'))
+            ->add($this->addJS('assets/js/cookie-headband.min.js'))
+            ->add($this->render("cookie-headband.html"))
+            ->add($this->addJS('assets/js/init-cookie-headband.js'))
+        ;
     }
 
-} 
+}

@@ -13,44 +13,32 @@
         params = $.extend(options, args);
         
         return this.each(function() {
-            
             elem = this;
             var $closeBtn = params.closeBtn;
             
             initHeadband();
             
-            $closeBtn.on('click', function() {
+            $closeBtn.on('click', function(ev) {
                 closeHeadband();
-                
-                return false;
+                ev.preventDefault();
             });
-            
         });
     };
     
     function initHeadband() {
-        if (typeof(Storage) !== "undefined") {
-            if (localStorage.cookieHeadband === undefined) {
-                localStorage.cookieHeadband = 'open';
-                
-                $(elem).addClass(params.openClass);
-            } else {
-                if (localStorage.cookieHeadband === "open") {
-                    $(elem).addClass(params.openClass);
-                } else {
-                    closeHeadband();
-                }
-            }
+        if ('accepted' != $.cookie('cookieHeadband')) {
+            $(elem).removeClass(params.closeClass);
+            $(elem).addClass(params.openClass);
+        } else {
+            $(elem).removeClass(params.openClass);
+            $(elem).addClass(params.closeClass);
         }
     }
     
     function closeHeadband() {
-        if (localStorage.cookieHeadband === "open") {
-            localStorage.setItem("cookieHeadband", "closed");
-        }
+        $.cookie('cookieHeadband', 'accepted', { expires: 365 });
         
         $(elem).removeClass(params.openClass);
         $(elem).addClass(params.closeClass);
     }
-    
 })(jQuery);

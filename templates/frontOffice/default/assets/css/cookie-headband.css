@@ -9,9 +9,7 @@
     color: #000;
 }
 
-#cookie-headband .container{
-    background: transparent;
-}
+#cookie-headband .container{background: transparent;}
 
 #cookie-headband button.close {
     font-size: 50px;
